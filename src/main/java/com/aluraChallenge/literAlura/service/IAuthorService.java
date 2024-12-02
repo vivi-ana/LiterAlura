@@ -11,4 +11,5 @@ public interface IAuthorService {
     List<Author> getAllRegisteredAuthors();
     void addNewAuthor(Author author);
     List<Author> getLivingAuthorsByYear(int year);
+    List<Author> getAuthorByName(String name);
 }

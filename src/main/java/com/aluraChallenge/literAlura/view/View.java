@@ -33,11 +33,11 @@ public class View {
     }
 
     /**
-     * Displays all registered authors.
+     * Displays authors.
      *
-     * @param authorList The list of registered authors to display.
+     * @param authorList The list of authors to display.
      */
-    public static void showAllAuthors(List<Author> authorList) {
+    public static void showAuthors(List<Author> authorList) {
         if (authorList.isEmpty()) {
             System.out.println("No authors found");
         } else {
@@ -99,10 +99,10 @@ public class View {
         String input;
         while (true) {
             input = getUserInput();
-            if (isValidLanguageInput(input)) {
+            if (isValidStringInput(input)) {
                 break;
             }
-            System.out.println("Invalid input. Please enter a valid language name without numbers.");
+            System.out.println("Invalid input. Please enter a valid language name without numbers or whitespace.");
         }
 
         return input;
@@ -133,7 +133,29 @@ public class View {
      * @param input the user input
      * @return true if the input is valid, false otherwise
      */
-    public static boolean isValidLanguageInput(String input) {
+    public static boolean isValidStringInput(String input) {
         return !input.matches(".*\\d.*") && !input.trim().isEmpty();
+    }
+
+    /**
+     * Prompts the user to enter the name of the author to search for.
+     *
+     * @return The author of the book to search for.
+     */
+    public static String searchAuthorByName() {
+        String input;
+        while (true) {
+            System.out.println("Please enter the name of the author you want to search for:");
+            input = getUserInput();
+            if (!isValidStringInput(input)) {
+                System.out.println("Invalid input. Please enter a valid name without numbers or whitespace.");
+            }
+            else if (input.length() < 3) {
+                System.out.println("The name must have at least 3 letters.");
+            } else {
+                break;
+            }
+        }
+        return input;
     }
 }

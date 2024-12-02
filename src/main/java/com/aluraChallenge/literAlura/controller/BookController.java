@@ -12,9 +12,8 @@ import com.aluraChallenge.literAlura.service.DataConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookController {
@@ -35,7 +34,7 @@ public class BookController {
      */
     public void searchBookByTitle(String bookTitle) {
         try {
-            validateInput(bookTitle);
+            validateInput(bookTitle, "Book title cannot be empty. Please enter a valid title.");
 
             String json = apiService.fetchData(URL_BASE + "?search=" + bookTitle.replace(" ", "+"));
             Data searchData = dataConverter.getData(json, Data.class);
@@ -52,14 +51,14 @@ public class BookController {
     }
 
     /**
-     * Validates the input book title.
-     *
-     * @param bookTitle The title of the book to validate.
-     * @throws IllegalArgumentException if the book title is empty.
+     * Validates a field.
+     * @param field The field to validate.
+     * @param message The message to show if the validation fails
+     * @throws IllegalArgumentException if the field is empty.
      */
-    private void validateInput(String bookTitle) {
-        if (bookTitle.trim().isEmpty()) {
-            throw new IllegalArgumentException("Book title cannot be empty. Please enter a valid title.");
+    private void validateInput(String field, String message) {
+        if (field.trim().isEmpty()) {
+            throw new IllegalArgumentException(message);
         }
     }
 
@@ -147,6 +146,24 @@ public class BookController {
         } else {
             System.out.println("Invalid language input. The language is not found.");
             return new ArrayList<>();
+        }
+    }
+
+    /**
+     * Searches for authors by name and prints the result.
+     * Validates the input to ensure the name is not empty.
+     * @param name the name of the author to search for
+     */
+    public void searchAuthorByName(String name) {
+        try {
+            validateInput(name, "The author's name cannot be empty. Please enter a valid name.");
+            List<Author> authorList = authorService.getAuthorByName(name);
+            if (authorList.isEmpty()) {
+                System.out.println("No authors found with the name: " + name);
+            } else {
+                authorList.forEach(author -> System.out.println(author.toString())); }
+        } catch (Exception e) {
+            System.out.println("An error occurred during author search: " + e.getMessage());
         }
     }
 }

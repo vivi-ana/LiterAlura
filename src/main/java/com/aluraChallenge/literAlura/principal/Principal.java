@@ -46,7 +46,7 @@ public class Principal {
                     3 - List registered authors
                     4 - List living authors since a specific year
                     5 - List books by language
-
+                    6 - Search author by name
                     0 - Exit""";
 
             try {
@@ -62,13 +62,16 @@ public class Principal {
                         View.showBooks(bookController.getAllRegisteredBooks());
                         break;
                     case 3:
-                        View.showAllAuthors(authorController.getAllRegisteredAuthors());
+                        View.showAuthors(authorController.getAllRegisteredAuthors());
                         break;
                     case 4:
-                        View.showAllAuthors(authorController.getLivingAuthorsByYear(View.getValidYear()));
+                        View.showAuthors(authorController.getLivingAuthorsByYear(View.getValidYear()));
                         break;
                     case 5:
                         View.showBooks(bookController.getBooksByLanguages(View.getLanguages()));
+                        break;
+                    case 6:
+                        bookController.searchAuthorByName(View.searchAuthorByName());
                         break;
                     case 0:
                         System.out.println("Closing the application...");

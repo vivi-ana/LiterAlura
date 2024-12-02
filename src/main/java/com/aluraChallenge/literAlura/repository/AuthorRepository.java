@@ -22,4 +22,14 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
      */
     @Query("SELECT a FROM Author a WHERE a.yearOfDeath > :year AND a.yearOfBirth < :year")
     List<Author> findLivingAuthors(int year);
+
+    /**
+     * Finds authors whose names contain the provided name pattern, ignoring case.
+     * This method uses a SQL LIKE query to search for authors whose names contain
+     * the specified pattern, ignoring case differences.
+     * @param name the name pattern to search for
+     * @return a list of authors matching the name pattern
+     */
+    @Query("SELECT a FROM Author a WHERE LOWER(a.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    List<Author> findByName(String name);
 }

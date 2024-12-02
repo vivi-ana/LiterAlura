@@ -56,4 +56,15 @@ public class AuthorServiceImpl implements IAuthorService {
     public List<Author> getLivingAuthorsByYear(int year) {
         return authorRepository.findLivingAuthors(year);
     }
+
+    /**
+     * Retrieves a list of living authors based on a specific year.
+     *
+     * @param name The year to consider for finding living authors.
+     * @return A list of authors who are considered living in the given year.
+     */
+    @Override
+    public List<Author> getAuthorByName(String name) {
+        return authorRepository.findByName(name);
+    }
 }
