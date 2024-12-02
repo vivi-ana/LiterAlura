@@ -47,6 +47,7 @@ public class Principal {
                     4 - List living authors since a specific year
                     5 - List books by language
                     6 - Search author by name
+                    7 - Top 10 most downloaded books
                     0 - Exit""";
 
             try {
@@ -72,6 +73,9 @@ public class Principal {
                         break;
                     case 6:
                         bookController.searchAuthorByName(View.searchAuthorByName());
+                        break;
+                    case 7:
+                        View.showBooks(bookController.getTop10MostDownloaded());
                         break;
                     case 0:
                         System.out.println("Closing the application...");

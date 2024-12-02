@@ -166,4 +166,19 @@ public class BookController {
             System.out.println("An error occurred during author search: " + e.getMessage());
         }
     }
+
+    /**
+     * Retrieves the top 10 most downloaded books.
+     * This method fetches all registered books, sorts them by the number of downloads
+     * in descending order, limits the result to the top 10 books, prints the titles
+     * of these books in uppercase, and collects them into a list.
+     * @return a list of the top 10 most downloaded books
+     */
+    public List<Book> getTop10MostDownloaded() {
+        List<Book> bookList = bookService.getAllRegisteredBooks();
+        return bookList.stream()
+                .sorted(Comparator.comparing(Book::getNumberOfDownloads).reversed())
+                .limit(10)
+                .collect(Collectors.toList());
+    }
 }
