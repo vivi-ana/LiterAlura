@@ -34,8 +34,13 @@ DB_PASSWORD=
 * DB_PASSWORD: It is the password associated with the username specified above.
 
 ## Features 
-- Search and add a book by title
-- Display book and author details 
-- Search for living authors by year
-- Search for books by language
+- Search and add a book by title.
+- Display book and author details. 
+- Search for living authors by year.
+- Search for books by language.
+- Search author by name.
+- Top 10 most downloaded books.
+- Statistics like average number of downloads, maximum number of downloads, 
+minimum number of downloads and number of records evaluated for calculating the statistics.
+
 

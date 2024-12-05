@@ -181,4 +181,24 @@ public class BookController {
                 .limit(10)
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Retrieves and prints statistics for the number of downloads of all registered books.
+     * The statistics include the average, maximum, minimum, and count of downloads.
+     */
+    public void getStatistics() {
+        List<Book> bookList = bookService.getAllRegisteredBooks();
+        DoubleSummaryStatistics statistics = bookList.stream()
+                .filter(d -> d.getNumberOfDownloads() > 0)
+                .collect(Collectors.summarizingDouble(Book::getNumberOfDownloads));
+        System.out.println("*************** Statistics ************");
+        if (statistics.getCount() == 0) {
+            System.out.println("No data available to calculate statistics");
+        } else {
+            System.out.println("Average number of downloads: " + statistics.getAverage());
+            System.out.println("Maximum number of downloads: " + statistics.getMax());
+            System.out.println("Minimum number of downloads: " + statistics.getMin());
+            System.out.println("Number of records evaluated for calculating the statistics: " + statistics.getCount());
+        }
+    }
 }

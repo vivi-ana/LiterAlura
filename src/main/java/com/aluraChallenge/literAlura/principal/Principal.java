@@ -48,6 +48,7 @@ public class Principal {
                     5 - List books by language
                     6 - Search author by name
                     7 - Top 10 most downloaded books
+                    8 - Statistics
                     0 - Exit""";
 
             try {
@@ -76,6 +77,9 @@ public class Principal {
                         break;
                     case 7:
                         View.showBooks(bookController.getTop10MostDownloaded());
+                        break;
+                    case 8:
+                        bookController.getStatistics();
                         break;
                     case 0:
                         System.out.println("Closing the application...");
